@@ -51,8 +51,6 @@ namespace AlbaAirwaysV1
                     }
                 });
             });
-            services.AddHttpContextAccessor();
-            services.AddTransient<Utilities>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -34,8 +34,6 @@ namespace AlbaAirwaysV1.Controllers
         [HttpGet]
         public IActionResult GetSeatingLayout()
         {
-            //var utilities = new Utilities(new HttpContextAccessor());
-            //var json = utilities.ProcessRequest(HttpContext);
             var seatDb = new SeatDB();
 
             var json = new JsonObject();

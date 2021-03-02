@@ -9,13 +9,13 @@ namespace AlbaAirwaysV1.Controllers
 {
     public class SeatingController : ControllerBase
     {
-        private Utilities _utilities;
+        //private Utilities _utilities;
         private SeatDB seatDB;
         private int personCount;
         
-        public SeatingController(Utilities utilities)
+        public SeatingController()
         {
-            _utilities = utilities;
+            //_utilities = utilities;
             seatDB = new SeatDB();
             personCount = 0;
         }
@@ -151,20 +151,6 @@ namespace AlbaAirwaysV1.Controllers
             }
             return Ok();
         }
-
-
-
-        //public void ProcessRequest(HttpContext ctx)
-        //{
-        //    var json = new JSONResponse()
-        //    {
-        //        Success = ctx.Request.QueryString["name"] != null,
-        //        Name = ctx.Request.QueryString["name"]
-        //    };
-
-        //    ctx.Response.ContentType = "application/json";
-        //    ctx.Response.Write(JsonConvert.SerializeObject(json));
-        //}
 
     }
 }
