@@ -31,6 +31,7 @@ namespace AlbaAirwaysV1.Controllers
             return View();
         }
 
+        [HttpGet]
         public IActionResult GetSeatingLayout()
         {
             //var utilities = new Utilities(new HttpContextAccessor());

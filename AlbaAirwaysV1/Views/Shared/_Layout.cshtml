@@ -17,6 +17,7 @@
                 url: '/Home/GetSeatingLayout',
                 data: { json: 'json' },
                 contentType: "application/json",
+                traditional: true,
                 error: (error) => {
                     console.log(JSON.stringify(error));
                     alert("Error Occurred");
@@ -24,9 +25,8 @@
                 success: function (data) {
                     console.log(data);
                     var receivedData = [];
-                    //JSON.stringify(data);
-                    $.each(data.jsonArray, function (index) {
-                        $.each(data.jsonArray[index], function (key, value) {
+                    $.each(JSON.parse(data.jsonArray), function (index) {
+                        $.each(JSON.parse(data.jsonArray)[index], function (key, value) {
                             var point = [];
                             point.push(key);
                             point.push(value);
