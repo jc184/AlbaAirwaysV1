@@ -1,5 +1,3 @@
-using System;
-
 namespace AlbaAirwaysV1.Models
 {
     public class ErrorViewModel

@@ -1,13 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Threading.Channels;
-using System.Threading.Tasks;
 using AlbaAirwaysV1.Cart;
 using Microsoft.Data.SqlClient;
-using Microsoft.EntityFrameworkCore;
 
 namespace AlbaAirwaysV1.Models
 {

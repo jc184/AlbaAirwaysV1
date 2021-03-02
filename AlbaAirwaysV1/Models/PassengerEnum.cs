@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace AlbaAirwaysV1.Models
+﻿namespace AlbaAirwaysV1.Models
 {
     public enum PassengerEnum
     {

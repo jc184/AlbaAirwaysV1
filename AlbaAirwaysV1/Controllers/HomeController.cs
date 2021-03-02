@@ -1,11 +1,8 @@
 ﻿using AlbaAirwaysV1.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
 using AlbaAirwaysV1.Cart;
 using Microsoft.AspNetCore.Http;
 using RestSharp;
@@ -31,7 +28,15 @@ namespace AlbaAirwaysV1.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Gets a Seating Layout in the form of a boolean array.
+        /// </summary>
+        /// <returns>The current Seating Layout</returns>
+        /// <response code="200">Returns the Layout</response>
+        /// <response code="400">If the item is null</response>
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult GetSeatingLayout()
         {
             var seatDb = new SeatDB();
@@ -45,7 +50,6 @@ namespace AlbaAirwaysV1.Controllers
             BookingCart bCart = new BookingCart();
             int flightId = 1;
             //bCart = (BookingCart)session.getAttribute("cart");
-            //member.put("arrayData", seatDB.getSeatingLayout(flightId));
             member.Add("arrayData", seatDb.GetUpdatedSeats(bCart, flightId).ToArray());
             array.Add(member);
 
