@@ -1,16 +1,17 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Protocols;
 
 #nullable disable
 
 namespace AlbaAirwaysV1.Models.Entities
 {
-    public partial class AlbaAirwaysDBContext : DbContext
+    public partial class AlbaAirwaysDbContext : DbContext
     {
-        public AlbaAirwaysDBContext()
+        public AlbaAirwaysDbContext()
         {
         }
 
-        public AlbaAirwaysDBContext(DbContextOptions<AlbaAirwaysDBContext> options)
+        public AlbaAirwaysDbContext(DbContextOptions<AlbaAirwaysDbContext> options)
             : base(options)
         {
         }
@@ -21,15 +22,6 @@ namespace AlbaAirwaysV1.Models.Entities
         public virtual DbSet<Passenger> Passengers { get; set; }
         public virtual DbSet<Route> Routes { get; set; }
         public virtual DbSet<Seat> Seats { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=DESKTOP-M6282RS\\SS2019;Database=AlbaAirwaysDB;Trusted_Connection=True;");
-            }
-        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -6,23 +6,23 @@ using Microsoft.Data.SqlClient;
 
 namespace AlbaAirwaysV1.Models
 {
-    public class SeatDB
+    public class SeatDb
     {
-        private const int NUMBER_OF_SEATS = 24;
-        private bool[] seats = new bool[NUMBER_OF_SEATS];
-        private bool[] existingSeatingLayoutDB = new bool[NUMBER_OF_SEATS];
-        private bool[] reservedSeats = new bool[NUMBER_OF_SEATS];
-        private static List<bool[]> arrays = new List<bool[]>();
+        private const int NumberOfSeats = 24;
+        private bool[] _seats = new bool[NumberOfSeats];
+        private bool[] _existingSeatingLayoutDb = new bool[NumberOfSeats];
+        private bool[] _reservedSeats = new bool[NumberOfSeats];
+        private static List<bool[]> _arrays = new List<bool[]>();
 
         public bool[] GetUpdatedSeats(BookingCart bCart, int flightId)
         {
-            existingSeatingLayoutDB = getExistingSeatsDB(flightId);
-            reservedSeats = GetReservedSeats(bCart);
+            _existingSeatingLayoutDb = GetExistingSeatsDb(flightId);
+            _reservedSeats = GetReservedSeats(bCart);
             try
             {
-                arrays.Add(existingSeatingLayoutDB);
-                arrays.Add(reservedSeats);
-                seats = AddBooleanArrays(arrays);
+                _arrays.Add(_existingSeatingLayoutDb);
+                _arrays.Add(_reservedSeats);
+                _seats = AddBooleanArrays(_arrays);
             }
             catch (Exception e)
             {
@@ -37,10 +37,10 @@ namespace AlbaAirwaysV1.Models
             //{
             //    Console.WriteLine(value);
             //}
-            return seats;
+            return _seats;
         }
 
-        public bool[] getExistingSeatsDB(int flightId)
+        public bool[] GetExistingSeatsDb(int flightId)
         {
             string connectionString = "Server=DESKTOP-M6282RS\\SS2019;Database=AlbaAirwaysDB;Trusted_Connection=True;";
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -67,7 +67,7 @@ namespace AlbaAirwaysV1.Models
                         }
                         foreach (int seatNumber in seatNumbers)
                         {
-                            existingSeatingLayoutDB[seatNumber] = true;
+                            _existingSeatingLayoutDb[seatNumber] = true;
                         }
                         //}
                     
@@ -76,7 +76,7 @@ namespace AlbaAirwaysV1.Models
                     Console.WriteLine("Unable to get records: [" + sqle.Errors + "] " + sqle.Message);
                 }
                 connection.Dispose();
-                return existingSeatingLayoutDB;
+                return _existingSeatingLayoutDb;
             }
         }
 
@@ -89,12 +89,12 @@ namespace AlbaAirwaysV1.Models
                 List<int> outboundSeatNumbers = GetOutboundBookedSeats(bCart);
                 if (bCart.Persons.Count > 0)
                 {//not needed??
-                    bool[] outboundReservedSeats = new bool[NUMBER_OF_SEATS];
+                    bool[] outboundReservedSeats = new bool[NumberOfSeats];
                     foreach (int outboundSeatNumber in outboundSeatNumbers)
                     {
                         outboundReservedSeats[outboundSeatNumber] = true;
                     }
-                    reservedSeats = outboundReservedSeats;
+                    _reservedSeats = outboundReservedSeats;
                 }
             }
             else if (bCart.Equals(bCart.ReturnPersons))
@@ -102,15 +102,15 @@ namespace AlbaAirwaysV1.Models
                 List<int> returnSeatNumbers = GetReturnBookedSeats(bCart);
                 if (bCart.ReturnPersons.Count > 0)
                 {//not needed??
-                    bool[] returnReservedSeats = new bool[NUMBER_OF_SEATS];
+                    bool[] returnReservedSeats = new bool[NumberOfSeats];
                     foreach (int returnSeatNumber in returnSeatNumbers)
                     {
                         returnReservedSeats[returnSeatNumber] = true;
                     }
-                    reservedSeats = returnReservedSeats;
+                    _reservedSeats = returnReservedSeats;
                 }
             }
-            return reservedSeats;
+            return _reservedSeats;
         }
 
         public List<int> GetOutboundBookedSeats(BookingCart bCart)
@@ -118,9 +118,9 @@ namespace AlbaAirwaysV1.Models
             List<int> outboundSeatNumbers = new List<int>();
             for (int i = 0; i < bCart.Persons.Count; i++)
             {
-                if (bCart.Persons[i].getSeat().SeatNo != null)
+                if (bCart.Persons[i].GetSeat().SeatNo != null)
                 {
-                    int outboundSeatNumber = bCart.Persons[i].getSeat().SeatNo;
+                    int outboundSeatNumber = bCart.Persons[i].GetSeat().SeatNo;
                     outboundSeatNumbers.Add(outboundSeatNumber);
                 }
             }
@@ -132,9 +132,9 @@ namespace AlbaAirwaysV1.Models
             List<int> returnSeatNumbers = new List<int>();
             for (int i = 0; i < bCart.Persons.Count; i++)
             {
-                if (bCart.Persons[i].getSeat().SeatNo != null)
+                if (bCart.Persons[i].GetSeat().SeatNo != null)
                 {
-                    int returnSeatNumber = bCart.Persons[i].getSeat().SeatNo;
+                    int returnSeatNumber = bCart.Persons[i].GetSeat().SeatNo;
                     returnSeatNumbers.Add(returnSeatNumber);
                 }
             }
@@ -156,9 +156,9 @@ namespace AlbaAirwaysV1.Models
             return result;
         }
 
-        public void setSeats(bool[] seats)
+        public void SetSeats(bool[] seats)
         {
-            this.seats = seats;
+            this._seats = seats;
         }
     }
 }

@@ -6,8 +6,8 @@ namespace AlbaAirwaysV1.Cart
 {
     public class BookingCartItem
     {
-        private Seat seat;
-        private PassengerEnum seatOwner;
+        private Seat _seat;
+        private PassengerEnum _seatOwner;
 
         public BookingCartItem()
         {
@@ -15,36 +15,36 @@ namespace AlbaAirwaysV1.Cart
 
         public BookingCartItem(Seat seat)
         {
-            this.seat = seat;
+            this._seat = seat;
         }
 
         public BookingCartItem(Seat seat, PassengerEnum seatOwner)
         {
-            this.seat = seat;
-            this.seatOwner = seatOwner;
+            this._seat = seat;
+            this._seatOwner = seatOwner;
         }
 
         public PassengerEnum PassengerEnum { get; set; }
         
 
-        public Seat getSeat()
+        public Seat GetSeat()
         {
-            return seat;
+            return _seat;
         }
 
-        public Double getSeatTotal()
+        public Double GetSeatTotal()
         {
             Double amount = 0.0;
-            switch (seatOwner)
+            switch (_seatOwner)
                 {
                     case PassengerEnum.Adult:
-                        amount = (double)seat.SeatPrice;
+                        amount = (double)_seat.SeatPrice;
                         break;
                     case PassengerEnum.Child:
-                        amount = (double)seat.SeatPrice * (1 - 0.5);
+                        amount = (double)_seat.SeatPrice * (1 - 0.5);
                         break;
                     case PassengerEnum.Infant:
-                        amount = (double)seat.SeatPrice * (1 - 0.75);
+                        amount = (double)_seat.SeatPrice * (1 - 0.75);
                         break;
                 }
             return amount;
@@ -56,9 +56,9 @@ namespace AlbaAirwaysV1.Cart
         //    return currency.format(this.getSeatTotal().doubleValue());
         //}
 
-        public void setSeat(Seat seat)
+        public void SetSeat(Seat seat)
         {
-            this.seat = seat;
+            this._seat = seat;
         }
     }
 }

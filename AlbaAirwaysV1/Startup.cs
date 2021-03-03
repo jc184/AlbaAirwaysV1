@@ -23,29 +23,8 @@ namespace AlbaAirwaysV1
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddDbContext<AlbaAirwaysDBContext>(option =>
-                option.UseSqlServer("Server=DESKTOP-M6282RS\\SS2019;Database=AlbaAirwaysDB;Trusted_Connection=True;"));
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo
-                {
-                    Version = "v1",
-                    Title = "AlbaAirwaysV1 API",
-                    Description = "An ASP.NET Core Web API using a Seating Layout for an experimental Flight Booking System",
-                    TermsOfService = new Uri("https://example.com/terms"),
-                    Contact = new OpenApiContact
-                    {
-                        Name = "James Chalmers",
-                        Email = "james.chalmers184@gmail.com",
-                        Url = new Uri("https://twitter.com/jc1848"),
-                    },
-                    License = new OpenApiLicense
-                    {
-                        Name = "Use under LICX",
-                        Url = new Uri("https://example.com/license"),
-                    }
-                });
-            });
+            services.AddDbContext<AlbaAirwaysDbContext>(option =>
+                option.UseSqlServer(Configuration.GetConnectionString("AlbaAirwaysDB")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,7 +32,6 @@ namespace AlbaAirwaysV1
         {
             if (env.IsDevelopment())
             {
-                app.UseSwagger();
                 app.UseDeveloperExceptionPage();
             }
             else
@@ -62,11 +40,6 @@ namespace AlbaAirwaysV1
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-            });
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

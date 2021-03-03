@@ -28,14 +28,14 @@ namespace AlbaAirwaysV1.Cart
 
 
 
-        public void addItem(BookingCartItem item)
+        public void AddItem(BookingCartItem item)
         {
             //If the item already exists in the cart, only the quantity is changed.
-            int code = item.getSeat().SeatNo;
+            int code = item.GetSeat().SeatNo;
             for (int i = 0; i < Persons.Count; i++)
             {
                 BookingCartItem lineItem = Persons[i];
-                if (lineItem.getSeat().SeatNo == code)
+                if (lineItem.GetSeat().SeatNo == code)
                 {
                     return;
                 }
@@ -43,13 +43,13 @@ namespace AlbaAirwaysV1.Cart
             Persons.Add(item);
         }
 
-        public void removeItem(BookingCartItem item)
+        public void RemoveItem(BookingCartItem item)
         {
-            int code = item.getSeat().SeatNo;
+            int code = item.GetSeat().SeatNo;
             for (int i = 0; i < Persons.Count; i++)
             {
                 BookingCartItem lineItem = Persons[i];
-                if (lineItem.getSeat().SeatNo == code)
+                if (lineItem.GetSeat().SeatNo == code)
                 {
                     Persons.RemoveAt(i);
                     return;
@@ -57,18 +57,18 @@ namespace AlbaAirwaysV1.Cart
             }
         }
 
-        public double getBookingAmount()
-        {//Should work 
-            Double amount = 0.0;
-            Double returnAmount = 0.0;
+        public double GetBookingAmount()
+        {
+            double amount = 0.0;
+            double returnAmount = 0.0;
 
             foreach (BookingCartItem bcItem in Persons)
             {
-                amount += bcItem.getSeatTotal();
+                amount += bcItem.GetSeatTotal();
             }
             foreach (BookingCartItem returnBcItem in ReturnPersons)
             {
-                returnAmount += returnBcItem.getSeatTotal();
+                returnAmount += returnBcItem.GetSeatTotal();
             }
             double totalAmount = amount + returnAmount;
             return totalAmount;

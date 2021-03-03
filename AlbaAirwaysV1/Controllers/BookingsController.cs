@@ -9,9 +9,9 @@ namespace AlbaAirwaysV1.Controllers
 {
     public class BookingsController : Controller
     {
-        private readonly AlbaAirwaysDBContext _context;
+        private readonly AlbaAirwaysDbContext _context;
 
-        public BookingsController(AlbaAirwaysDBContext context)
+        public BookingsController(AlbaAirwaysDbContext context)
         {
             _context = context;
         }
@@ -19,8 +19,8 @@ namespace AlbaAirwaysV1.Controllers
         // GET: Bookings
         public async Task<IActionResult> Index()
         {
-            var albaAirwaysDBContext = _context.Bookings.Include(b => b.Customer).Include(b => b.InboundFlight).Include(b => b.OutboundFlight);
-            return View(await albaAirwaysDBContext.ToListAsync());
+            var albaAirwaysDbContext = _context.Bookings.Include(b => b.Customer).Include(b => b.InboundFlight).Include(b => b.OutboundFlight);
+            return View(await albaAirwaysDbContext.ToListAsync());
         }
 
         // GET: Bookings/Details/5

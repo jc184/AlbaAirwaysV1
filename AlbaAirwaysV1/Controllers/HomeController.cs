@@ -35,11 +35,11 @@ namespace AlbaAirwaysV1.Controllers
         /// <response code="200">Returns the Layout</response>
         /// <response code="400">If the item is null</response>
         [HttpGet]
-        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult GetSeatingLayout()
         {
-            var seatDb = new SeatDB();
+            var seatDb = new SeatDb();
 
             var json = new JsonObject();
             var array = new JsonArray();
